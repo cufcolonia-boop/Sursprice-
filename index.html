@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <title>Feliz Día del Amigo</title>
+
+  <style>
+    :root{
+      --rosa:#ff6680;
+      --violeta:#7657ff;
+      --texto:#272330;
+      --sombra:0 16px 45px rgba(0,0,0,.18);
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--texto);
+      background:#fff9fb;
+    }
+
+    body{
+      overflow-x:hidden;
+    }
+
+    button{
+      font:inherit;
+    }
+
+    .oculto{
+      display:none !important;
+    }
+
+    .pantalla{
+      min-height:100svh;
+      width:100%;
+      padding:24px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .tarjeta{
+      width:min(620px,100%);
+      padding:34px 22px;
+      border-radius:30px;
+      background:rgba(255,255,255,.96);
+      box-shadow:var(--sombra);
+    }
+
+    .pregunta{
+      color:white;
+      background:
+        radial-gradient(circle at 20% 10%,#432e70 0,transparent 34%),
+        radial-gradient(circle at 90% 90%,#671f42 0,transparent 36%),
+        #111;
+    }
+
+    .pregunta .tarjeta{
+      background:rgba(20,20,20,.82);
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+    }
+
+    h1,h2,p{
+      margin-top:0;
+    }
+
+    .pregunta h1{
+      margin-bottom:20px;
+      font-size:clamp(2.6rem,11vw,5rem);
+      line-height:1;
+    }
+
+    .pregunta p{
+      margin-bottom:25px;
+      color:#ddd;
+      font-size:1.06rem;
+      line-height:1.6;
+    }
+
+    .boton{
+      border:0;
+      border-radius:999px;
+      padding:15px 28px;
+      min-width:160px;
+      cursor:pointer;
+      color:white;
+      font-weight:800;
+      letter-spacing:.4px;
+      background:linear-gradient(135deg,var(--rosa),var(--violeta));
+      box-shadow:0 10px 28px rgba(118,87,255,.35);
+      transition:transform .15s ease;
+    }
+
+    .boton:active{
+      transform:scale(.97);
+    }
+
+    .broma{
+      background:#f5f5f5;
+    }
+
+    .broma .tarjeta{
+      padding:15px 15px 28px;
+    }
+
+    .broma img{
+      display:block;
+      width:100%;
+      max-height:68svh;
+      object-fit:contain;
+      border-radius:20px;
+      background:white;
+    }
+
+    .mentira{
+      margin:22px 0 8px;
+      font-size:clamp(2.5rem,12vw,5rem);
+      letter-spacing:-2px;
+    }
+
+    .subtexto{
+      margin-bottom:22px;
+      color:#777;
+    }
+
+    .video-previo{
+      color:white;
+      background:#080808;
+    }
+
+    .video-previo .tarjeta{
+      padding:14px 14px 28px;
+      background:#151515;
+      border:1px solid #292929;
+    }
+
+    .video-previo h2{
+      margin:12px 0 20px;
+      font-size:clamp(1.8rem,8vw,3rem);
+    }
+
+    video{
+      display:block;
+      width:100%;
+      max-height:67svh;
+      border-radius:18px;
+      background:#000;
+    }
+
+    .aviso-video{
+      display:none;
+      padding:30px 20px;
+      border:1px dashed #555;
+      border-radius:18px;
+      color:#bbb;
+      line-height:1.6;
+    }
+
+    .boton-video{
+      margin-top:22px;
+    }
+
+    .portada{
+      min-height:100svh;
+      padding:35px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:
+        radial-gradient(circle at top left,#ffe4ea 0,transparent 38%),
+        radial-gradient(circle at bottom right,#e8e1ff 0,transparent 38%),
+        #fffafb;
+    }
+
+    .portada-contenido{
+      width:min(700px,100%);
+      padding:48px 24px;
+      border-radius:32px;
+      background:rgba(255,255,255,.92);
+      box-shadow:var(--sombra);
+    }
+
+    .portada h1{
+      margin-bottom:35px;
+      font-size:clamp(3rem,12vw,6rem);
+      line-height:1;
+    }
+
+    .boton-grande{
+      width:min(390px,100%);
+      padding:18px 24px;
+      font-size:clamp(1rem,4vw,1.25rem);
+      text-transform:uppercase;
+    }
+
+    .ultima{
+      min-height:100svh;
+      padding:55px 18px;
+      background:
+        radial-gradient(circle at top right,#eee7ff 0,transparent 34%),
+        radial-gradient(circle at bottom left,#ffe8ee 0,transparent 34%),
+        #fff9fb;
+    }
+
+    .contenido-final{
+      width:min(1000px,100%);
+      margin:auto;
+    }
+
+    .contenido-final h2{
+      margin-bottom:30px;
+      text-align:center;
+      font-size:clamp(2.2rem,9vw,4.3rem);
+    }
+
+    .mensaje{
+      padding:30px 24px;
+      border-radius:30px;
+      background:white;
+      box-shadow:0 12px 35px rgba(30,20,40,.13);
+      text-align:center;
+      font-size:clamp(1rem,3.5vw,1.25rem);
+      line-height:1.8;
+    }
+
+    .firma{
+      margin-top:22px;
+      color:var(--rosa);
+      font-weight:bold;
+      font-size:1.2rem;
+    }
+
+    .final{
+      margin-top:55px;
+      padding:42px 24px;
+      border-radius:30px;
+      color:white;
+      text-align:center;
+      background:linear-gradient(135deg,var(--rosa),var(--violeta));
+      box-shadow:var(--sombra);
+    }
+
+    .final h2{
+      margin-bottom:14px;
+      font-size:clamp(2.2rem,9vw,4rem);
+    }
+
+    .final p{
+      margin:0;
+      font-size:clamp(1rem,4vw,1.25rem);
+    }
+
+    .entrada{
+      animation:entrada .7s ease both;
+    }
+
+    @keyframes entrada{
+      from{
+        opacity:0;
+        transform:translateY(25px);
+      }
+      to{
+        opacity:1;
+        transform:none;
+      }
+    }
+
+    @media(min-width:720px){
+      .tarjeta{
+        padding:46px 38px;
+      }
+
+      .mensaje{
+        padding:35px 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1. PREGUNTA INICIAL -->
+  <section id="pregunta" class="pantalla pregunta">
+    <div class="tarjeta">
+      <h1>¿Estás preparado?</h1>
+      <p>Antes de abrir el regalo necesito confirmar algo muy importante.</p>
+      <button class="boton" onclick="mostrarBroma()">SÍ</button>
+    </div>
+  </section>
+
+  <!-- 2. FOTO DE LA BROMA -->
+  <section id="broma" class="pantalla broma oculto">
+    <div class="tarjeta">
+      <img src="media/broma.jpg" alt="Foto sorpresa">
+      <h2 class="mentira">Meeeentira</h2>
+      <p class="subtexto">Ahora sí, sigan...</p>
+      <button class="boton" onclick="mostrarVideo()">CONTINUAR</button>
+    </div>
+  </section>
+
+  <!-- 3. VIDEO -->
+  <section id="videoPrevio" class="pantalla video-previo oculto">
+    <div class="tarjeta">
+      <h2>Primero miren esto</h2>
+
+      <!-- Agregar en media un video llamado video-sorpresa.mp4 -->
+      <video id="videoSorpresa" controls playsinline preload="metadata">
+        <source src="media/video-sorpresa.mp4" type="video/mp4">
+      </video>
+
+      <div id="avisoVideo" class="aviso-video">
+        Acá aparecerá el video cuando agregues
+        <strong>video-sorpresa.mp4</strong> dentro de la carpeta
+        <strong>media</strong>.
+      </div>
+
+      <button class="boton boton-video" onclick="mostrarRegalo()">ABRIR REGALO</button>
+    </div>
+  </section>
+
+  <!-- 4. PORTADA -->
+  <section id="regalo" class="portada oculto">
+    <div class="portada-contenido entrada">
+      <h1>Feliz Día del Amigo</h1>
+      <button class="boton boton-grande" onclick="mostrarUltima()">
+        UNA ÚLTIMA COSITA
+      </button>
+    </div>
+  </section>
+
+  <!-- 5. MENSAJE FINAL -->
+  <section id="ultima" class="ultima oculto">
+    <div class="contenido-final entrada">
+      <h2>Quería decirles algo</h2>
+
+      <div class="mensaje">
+        Gracias por estar, por compartir tantos momentos conmigo
+        y por ser esas personas que hacen que todo sea un poco mejor.
+
+        Espero que nuestra amistad siga sumando historias, risas,
+        salidas y recuerdos durante muchísimo tiempo.
+
+        <div class="firma">Con cariño, Mateo</div>
+      </div>
+
+      <div class="final">
+        <h2>¡Feliz Día del Amigo!</h2>
+        <p>Gracias por formar parte de mi vida, amigos.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function cambiarPantalla(actual, siguiente){
+      document.getElementById(actual).classList.add("oculto");
+      document.getElementById(siguiente).classList.remove("oculto");
+      window.scrollTo({top:0, behavior:"instant"});
+    }
+
+    function mostrarBroma(){
+      cambiarPantalla("pregunta","broma");
+    }
+
+    function mostrarVideo(){
+      cambiarPantalla("broma","videoPrevio");
+    }
+
+    function mostrarRegalo(){
+      const video = document.getElementById("videoSorpresa");
+      video.pause();
+      cambiarPantalla("videoPrevio","regalo");
+    }
+
+    function mostrarUltima(){
+      cambiarPantalla("regalo","ultima");
+    }
+
+    const video = document.getElementById("videoSorpresa");
+    const aviso = document.getElementById("avisoVideo");
+
+    video.addEventListener("error",function(){
+      video.style.display="none";
+      aviso.style.display="block";
+    });
+  </script>
+
+</body>
+</html>
